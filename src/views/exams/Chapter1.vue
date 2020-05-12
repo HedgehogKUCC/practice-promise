@@ -27,11 +27,15 @@ export default {
     case1() {
       this.increaseFirst()
 
-      setTimeout(() => {
-        this.increaseSecond()
-      }, 1500)
+      const promise = new Promise((res, rej) => {
+        setTimeout(() => {
+          res(this.increaseSecond())
+        }, 1500)
+      })
 
-      this.increaseThird()
+      promise.then(() => {
+        this.increaseThird()
+      })
     },
     // ----
     // 不可修改以下的method
